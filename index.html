@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инга Александровна | @artful__teach — Материалы для учителей</title>
+    <style>
+        /* Основные стили и благородная пастельно-бежевая гамма */
+        :root {
+            --bg-color: #f7f3ed;
+            --card-bg: #ffffff;
+            --text-main: #4a3e3d;
+            --text-muted: #8c7e7c;
+            --accent-color: #d4c5b9;
+            --accent-hover: #c5b4a6;
+            --btn-whatsapp: #4f7754;
+            --btn-telegram: #4fa077;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; align-items: center; padding: 30px 15px; min-height: 100vh; }
+        
+        /* Анимация плавного появления контента */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .container { max-width: 500px; width: 100%; animation: fadeInUp 0.6s ease-out forwards; }
+        
+        /* Шапка профиля */
+        .header { text-align: center; margin-bottom: 30px; }
+        .avatar { width: 96px; height: 96px; border-radius: 50%; border: 3px solid var(--accent-color); object-fit: cover; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; color: #3d3130; }
+        .username { font-size: 14px; color: var(--text-muted); font-weight: bold; margin-bottom: 12px; display: inline-block; background: rgba(212, 197, 185, 0.3); padding: 3px 12px; border-radius: 20px; }
+        .bio { font-size: 14px; line-height: 1.5; color: var(--text-main); padding: 0 10px; }
+
+        /* Кнопки связи */
+        .social-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
+        .btn-social { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 12px; text-decoration: none; color: white; font-weight: bold; font-size: 14px; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .btn-tg { background-color: #54929e; }
+        .btn-wa { background-color: #6c8a74; }
+        .btn-social:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.1); filter: brightness(0.95); }
+
+        /* Переключатель вкладок (Классы) */
+        .tabs-nav { display: flex; gap: 5px; background: rgba(212, 197, 185, 0.4); padding: 4px; border-radius: 14px; margin-bottom: 20px; overflow-x: auto; white-space: nowrap; }
+        .tab-btn { flex: 1; text-align: center; padding: 10px 8px; border: none; background: none; border-radius: 10px; font-size: 13px; font-weight: 600; color: var(--text-main); cursor: pointer; transition: all 0.3s ease; min-width: 70px; }
+        .tab-btn.active { background: var(--card-bg); box-shadow: 0 4px 10px rgba(0,0,0,0.06); color: #3d3130; }
+
+        /* Стили списков материалов */
+        .tab-content { display: none; flex-direction: column; gap: 12px; }
+        .tab-content.active { display: flex; animation: fadeInUp 0.4s ease-out; }
+        
+        .material-card { display: flex; flex-direction: column; background: var(--card-bg); padding: 16px; border-radius: 14px; text-decoration: none; color: var(--text-main); box-shadow: 0 4px 12px rgba(0,0,0,0.03); border: 1px solid rgba(212, 197, 185, 0.2); transition: all 0.3s ease; }
+        .material-card:hover { transform: translateY(-4px) scale(1.01); box-shadow: 0 8px 20px rgba(212, 197, 185, 0.4); border-color: var(--accent-color); }
+        .mat-title { font-weight: 600; font-size: 15px; margin-bottom: 4px; color: #3d3130; }
+        .mat-desc { font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+        .mat-price { font-size: 14px; font-weight: bold; color: #7c695c; margin-top: 8px; display: flex; align-items: center; gap: 5px; }
+
+        /* Раздел Оплата */
+        .info-card { background: var(--card-bg); border-radius: 16px; padding: 20px; margin-top: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); border-left: 5px solid var(--accent-color); }
+        .info-title { font-weight: bold; font-size: 16px; margin-bottom: 12px; color: #3d3130; display: flex; align-items: center; gap: 8px; }
+        .info-steps { list-style: none; font-size: 13px; line-height: 1.6; color: var(--text-main); }
+        .info-steps li { margin-bottom: 10px; position: relative; padding-left: 20px; }
+        .info-steps li::before { content: "✔"; position: absolute; left: 0; color: #6c8a74; font-weight: bold; }
+        
+        .payment-methods { background: #fdfcfb; padding: 12px; border-radius: 10px; border: 1px dashed var(--accent-color); margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+
+        footer { text-align: center; margin-top: 40px; font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <!-- Шапка профиля -->
+    <div class="header">
+        <!-- Замените ссылку ниже на ваше реальное фото, если нужно -->
+        <img src="https://unsplash.com" alt="Инга Александровна" class="avatar">
+        <h1>Инга Александровна</h1>
+        <span class="username">@artful__teach</span>
+        <p class="bio">Дидактические игры, опорные материалы и эстетичное оформление для начальной школы. Сэкономьте время на подготовке к урокам! 📚✨</p>
+    </div>
+
+    <!-- Кнопки связи -->
+    <div class="social-buttons">
+        <a href="https://t.me" class="btn-social btn-tg" target="_blank">✈ Telegram</a>
+        <!-- Замените ТЕЛЕФОН на ваш номер без +, например 37529XXXXXXX -->
+        <a href="https://wa.me 34" class="btn-social btn-wa" target="_blank">💬 WhatsApp</a>
+    </div>
+
+    <!-- Переключатель классов (Навигация) -->
+    <div class="tabs-nav">
+        <button class="tab-btn active" onclick="openTab('class1')">1 класс</button>
+        <button class="tab-btn" onclick="openTab('class2')">2 класс</button>
+        <button class="tab-btn" onclick="openTab('class3')">3 класс</button>
+        <button class="tab-btn" onclick="openTab('class4')">4 класс & МРБ</button>
+        <button class="tab-btn" onclick="openTab('prav')">Православие</button>
+    </div>
+
+    <!-- 1 КЛАСС -->
+    <div id="class1" class="tab-content active">
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
+            <span class="mat-title">🧩 Опорные карточки: Звуки и Буквы</span>
+            <span class="mat-desc">Яркие визуальные схемы для быстрого запоминания гласных и согласных звуков.</span>
+            <span class="mat-price">💰 3 BYN / 90 ₽</span>
+        </a>
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
+            <span class="mat-title">🔢 Дидактическая игра «Состав числа до 10»</span>
+            <span class="mat-desc">Игровые домики и карточки-пазлы для уроков математики в 1 классе.</span>
+            <span class="mat-price">💰 4 BYN / 120 ₽</span>
+        </a>
+    </div>
+
+    <!-- 2 КЛАСС -->
+    <div id="class2" class="tab-content">
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
+            <span class="mat-title">📘 Наглядность по лит. чтению: Басни Крылова</span>
+            <span class="mat-desc">Портрет автора, разбор понятий (мораль, басня), пазлы "слово-картинка" со сносками и пословицы.</span>
+            <span class="mat-price">💰 3 BYN / 90 ₽</span>
+        </a>
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
+            <span class="mat-title">✏ Комплект «Части речи во 2 классе»</span>
+            <span class="mat-desc">Интерактивные речевые облачка, схемы-памятки: Существительное, Прилагательное, Глагол.</span>
+            <span class="mat-price">💰 4 BYN / 120 ₽</span>
+        </a>
+    </div>
+
+    <!-- 3 КЛАСС -->
+    <div id="class3" class="tab-content">
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
+            <span class="mat-title">📐 Математические блок-схемы «Умножение и деление»</span>
+            <span class="mat-desc">Карточки для автоматизации навыков табличного умножения и деления.</span>
+            <span class="mat-price">💰 3 BYN / 90 ₽</span>
+        </a>
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
+            <span class="mat-title">🌿 Окружающий мир: Карточки-гексы «Природа»</span>
+            <span class="mat-desc">Материал для интерактивной доски и групповой работы на уроке.</span>
+            <span class="mat-price">💰 4 BYN / 120 ₽</span>
+        </a>
+    </div>
+
+    <!-- 4 КЛАСС & МРБ -->
+    <div id="class4" class="tab-content">
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
+            <span class="mat-title">🇧🇾 Комплект МРБ: «Я. Моя семья. Моя Родина»</span>
+            <span class="mat-desc">Включает: Рабочий лист, информативную инфографику, презентацию с видеообзором, растяжки тем, иллюстрации и тематические речевые облачка.</span>
+            <span class="mat-price">💰 4 BYN / 120 ₽</span>
+        </a>
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
+            <span class="mat-title">⭐ Посвящение в Октябрята / Пионеры</span>
+            <span class="mat-desc">Тематический план, блок-схемы «Члены БРПО», пазлы «Правила октябрят», праздничные флажки + Презентация и сценарий в подарок.</span>
+            <span class="mat-price">💰 3 BYN / 90 ₽</span>
+        </a>
+        <a href="https://www.instagram.com/artful__teach/" class="material-card" target="_blank">
